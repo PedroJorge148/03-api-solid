@@ -1,5 +1,5 @@
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
-import { makeUserUseCase } from '@/use-cases/factories/make-user-use-case'
+import { makeCreateUserUseCase } from '@/use-cases/factories/make-create-user-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -13,7 +13,7 @@ export async function createUser(request: FastifyRequest, reply: FastifyReply) {
   const { name, email, password } = createUserBodySchema.parse(request.body)
 
   try {
-    const createUserUseCase = makeUserUseCase()
+    const createUserUseCase = makeCreateUserUseCase()
 
     await createUserUseCase.execute({
       name,
